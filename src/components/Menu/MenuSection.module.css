@@ -1,0 +1,11 @@
+.menuSection h2 {
+  margin-left: 80px;
+}
+
+.allPizzasContainer {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  padding-left: 80px;
+}

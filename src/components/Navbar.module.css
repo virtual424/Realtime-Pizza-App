@@ -1,0 +1,40 @@
+@import "../_variables.css";
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 4rem;
+}
+
+.menu {
+  width: 30%;
+}
+
+.menu ul {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  list-style: none;
+  text-decoration: none;
+}
+
+.menu a {
+  text-decoration: none;
+  color: var(--dark);
+  transition: var(--smooth);
+}
+
+.menu a:hover {
+  color: var(--primary);
+}
+
+.menu li:last-child {
+  background-color: var(--primary);
+  padding: 5px 15px;
+  border-radius: 30px;
+}
+
+.menu li:last-child:hover {
+  background-color: var(--primary-hover);
+}

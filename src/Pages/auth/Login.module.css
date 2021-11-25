@@ -1,0 +1,61 @@
+@import "../../_variables.css";
+
+.login {
+  min-height: calc(100vh - 100px);
+  display: flex;
+  align-items: center;
+  background-color: var(--secondary);
+}
+
+.loginCard {
+  width: 20%;
+  height: 50%;
+  background-color: white;
+  margin: 0 auto;
+  margin-top: -80px;
+  padding: 30px 35px 30px 25px;
+}
+
+.loginForm label {
+  font-weight: 500;
+  font-size: medium;
+}
+
+.errorText {
+  color: #b40e0e;
+  font-style: italic;
+  font-size: small;
+  margin-top: 0;
+}
+
+.invalid {
+  border: 1.5px solid #b40e0e;
+}
+
+.invalid:focus {
+  border-color: #ff8800;
+}
+
+.input :focus {
+  border: 1px solid var(--primary);
+}
+
+.button {
+  margin-top: 8px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container > :last-child {
+  text-decoration: none;
+  font-size: small;
+  color: black;
+}
+
+.container > :last-child:hover {
+  color: var(--primary);
+}

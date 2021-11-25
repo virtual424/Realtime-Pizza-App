@@ -1,0 +1,28 @@
+@import "../../_variables";
+
+.heroSection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4rem 0;
+  background-color: var(--secondary);
+}
+
+.left {
+  padding-left: 80px;
+}
+
+.left h1 {
+  font-size: 4rem;
+  font-weight: 400;
+  margin: 0 0 15px 0;
+}
+
+.left p {
+  font-style: italic;
+  margin-bottom: 5px;
+}
+
+.right img {
+  height: 520px;
+}

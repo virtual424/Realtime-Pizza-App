@@ -1,0 +1,17 @@
+.btn {
+  font-size: 1rem;
+  width: fit-content;
+  display: inline-block;
+  background-color: var(--primary);
+  border-radius: 30px;
+  padding: 8px 20px;
+}
+
+.link {
+  text-decoration: none;
+  color: white;
+}
+
+.btn:hover {
+  background-color: var(--primary-hover);
+}
