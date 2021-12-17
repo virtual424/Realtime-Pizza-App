@@ -59,3 +59,34 @@
 .container > :last-child:hover {
   color: var(--primary);
 }
+
+.userType {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+  margin-top: 10px;
+}
+
+.userType label {
+  flex: 0.5;
+}
+
+.userType select {
+  flex: 0.5;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 1px 1.5px 3px rgba(0, 0, 0, 0.2);
+  padding: 5px;
+}
+
+.errorDiv {
+  border: 1.5px solid #b40e0e;
+  background-color: #eccfcf;
+  color: #b40e0e;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.errorDiv p {
+  margin: 10px;
+}

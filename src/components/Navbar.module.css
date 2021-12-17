@@ -7,19 +7,24 @@
   padding: 1rem 4rem;
 }
 
+.logo {
+  flex: 0.5;
+}
+
 .menu {
-  width: 30%;
+  flex: 0.5;
 }
 
 .menu ul {
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
+  justify-content: end;
   list-style: none;
   text-decoration: none;
 }
 
 .menu a {
+  margin-right: 30px;
   text-decoration: none;
   color: var(--dark);
   transition: var(--smooth);
@@ -29,12 +34,16 @@
   color: var(--primary);
 }
 
-.menu li:last-child {
+.cartLogo {
   background-color: var(--primary);
   padding: 5px 15px;
   border-radius: 30px;
 }
 
-.menu li:last-child:hover {
+/* .cartLogo span {
+  color: white;
+} */
+
+.cartLogo:hover {
   background-color: var(--primary-hover);
 }

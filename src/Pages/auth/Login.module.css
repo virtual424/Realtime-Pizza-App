@@ -59,3 +59,15 @@
 .container > :last-child:hover {
   color: var(--primary);
 }
+
+.errorDiv {
+  border: 1.5px solid #b40e0e;
+  background-color: #eccfcf;
+  color: #b40e0e;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.errorDiv p {
+  margin: 10px;
+}
