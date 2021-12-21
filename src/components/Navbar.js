@@ -1,20 +1,20 @@
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./Navbar.module.css";
 import logo from "../assets/img/logo.png";
-import { signout } from "../store/authSlice";
+import { signOut } from "../store/actions/auth";
 import cart from "../assets/img/cart.png";
 import { Link } from "react-router-dom";
-import Async from "./UI/Async";
+import LoadingContainer from "./UI/LoadingContainer";
 import React from "react";
 
 const Navbar = () => {
-  const user = useSelector((state) => state.authReducer.user);
-  const status = useSelector((state) => state.authReducer.status);
+  const user = useSelector((state) => state.userReducer.user);
+  const pending = useSelector((state) => state.uiReducer.pending);
   const dispatch = useDispatch();
 
   const logoutHandler = (event) => {
     event.preventDefault();
-    dispatch(signout());
+    dispatch(signOut());
   };
 
   return (
@@ -22,7 +22,7 @@ const Navbar = () => {
       <Link to="/" className={styles.logo}>
         <img src={logo} alt="logo" />
       </Link>
-      <Async color="#fe5f1e">
+      <LoadingContainer>
         <div className={styles.menu}>
           <ul>
             {user && (
@@ -35,7 +35,7 @@ const Navbar = () => {
                 <Link to="/offers">Offers</Link>
               </li>
             )}
-            {!user && status !== "" && status !== "LOADING" && (
+            {!user && !pending && (
               <React.Fragment>
                 <li>
                   <Link to="/register">Register</Link>
@@ -64,7 +64,7 @@ const Navbar = () => {
             )}
           </ul>
         </div>
-      </Async>
+      </LoadingContainer>
     </div>
   );
 };

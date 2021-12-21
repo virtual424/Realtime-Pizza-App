@@ -5,29 +5,22 @@ import Card from "../../components/UI/Card";
 import Button from "../../components/UI/Button";
 import Input from "../../components/UI/Input";
 import useInput from "../../hooks/Input";
-import { signup, authActions } from "../../store/authSlice";
-import { uiActions } from "../../store/uiSlice";
+import { signUp } from "../../store/actions/auth";
 import { useDispatch, useSelector } from "react-redux";
+import { uiActions } from "../../store/reducers/uiSlice";
+import LoadingContainer from "../../components/UI/LoadingContainer";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [userType, setUserType] = useState("Admin");
   const dispatch = useDispatch();
-  const customError = useSelector((state) => state.uiReducer.error);
-  const error = useSelector((state) => state.authReducer.error);
-
-  let errorMessage;
-  if (customError) {
-    errorMessage = customError;
-  } else {
-    errorMessage = error;
-  }
+  const error = useSelector((state) => state.uiReducer.error);
 
   const {
     enteredInput: enteredName,
     inputChangeHandler: nameChangeHandler,
     blurChangeHandler: nameBlurHandler,
     hasError: nameHasError,
-    resetInput: resetName,
     isValid: nameIsValid,
     errorType: nameErrorType,
   } = useInput(/^[a-zA-Z ]+$/);
@@ -37,7 +30,6 @@ const Register = () => {
     inputChangeHandler: emailChangeHandler,
     blurChangeHandler: emailBlurHandler,
     hasError: emailHasError,
-    resetInput: resetEmail,
     isValid: emailIsValid,
     errorType: emailErrorType,
   } = useInput(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/); // eslint-disable-line
@@ -47,7 +39,6 @@ const Register = () => {
     inputChangeHandler: passwordChangeHandler,
     blurChangeHandler: passwordBlurHandler,
     hasError: passwordHasError,
-    resetInput: resetPassword,
     isValid: passwordIsValid,
     errorType: passwordErrorType,
   } = useInput(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/); // eslint-disable-line
@@ -57,7 +48,6 @@ const Register = () => {
     inputChangeHandler: confirmPasswordChangeHandler,
     blurChangeHandler: confirmPasswordBlurHandler,
     hasError: confirmPasswordHasError,
-    resetInput: resetConfirmPassword,
     isValid: confirmPasswordIsValid,
     errorType: confirmPasswordErrorType,
   } = useInput(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/); // eslint-disable-line
@@ -105,7 +95,9 @@ const Register = () => {
       confirmPasswordErrorText = "Please Enter a valid password";
   }
 
-  const registerHandler = () => {
+  const registerHandler = (event) => {
+    event.preventDefault();
+
     const entries = [
       enteredName,
       enteredEmail,
@@ -116,8 +108,9 @@ const Register = () => {
     const entriesEmpty = entries.every((element) => element.length === 0);
 
     if (enteredPassword !== enteredConfirmPassword) {
-      dispatch(uiActions.setError({ errorMessage: "Passwords do not match" }));
-      return;
+      return dispatch(
+        uiActions.setError({ message: "Passwords do not match" })
+      );
     }
 
     const entriesValid =
@@ -125,28 +118,22 @@ const Register = () => {
 
     if (!entriesEmpty && entriesValid) {
       dispatch(
-        signup({
+        signUp({
           name: enteredName,
           email: enteredEmail,
           password: enteredPassword,
-          userType: userType,
+          type: userType,
         })
       );
-      resetName();
-      resetEmail();
-      resetPassword();
-      resetConfirmPassword();
-      dispatch(uiActions.setError({ errorMessage: "" }));
-      dispatch(authActions.setError({ errorMessage: "" }));
     }
   };
 
   return (
     <div className={styles.register}>
       <Card className={styles.registerCard}>
-        {errorMessage && (
+        {error && (
           <div className={styles.errorDiv}>
-            <p>{errorMessage}</p>
+            <p>{error}</p>
           </div>
         )}
         <form className={styles.registerForm}>
@@ -208,15 +195,16 @@ const Register = () => {
             <p className={styles.errorText}>{confirmPasswordErrorText}</p>
           )}
 
-          <div className={styles.container}>
-            <Button
-              content="Register"
-              path=""
-              className={styles.button}
-              onClick={registerHandler}
-            />
-            <Link to="/login">Already have an account ?</Link>
-          </div>
+          <LoadingContainer>
+            <div className={styles.container}>
+              <Button
+                content="Register"
+                className={styles.button}
+                onClick={registerHandler}
+              />
+              <Link to="/login">Already have an account ?</Link>
+            </div>
+          </LoadingContainer>
         </form>
       </Card>
     </div>

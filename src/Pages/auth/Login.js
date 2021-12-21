@@ -1,25 +1,22 @@
-import React from "react";
 import styles from "./Login.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Card from "../../components/UI/Card";
 import Button from "../../components/UI/Button";
 import Input from "../../components/UI/Input";
 import useInput from "../../hooks/Input";
-import { signin, authActions } from "../../store/authSlice";
+import { signIn } from "../../store/actions/auth";
 import { useDispatch, useSelector } from "react-redux";
+import LoadingContainer from "../../components/UI/LoadingContainer";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const error = useSelector((state) => state.authReducer.error);
-  const errorMessage = error;
-  const navigate = useNavigate();
+  const error = useSelector((state) => state.uiReducer.error);
 
   const {
     enteredInput: enteredEmail,
     inputChangeHandler: emailChangeHandler,
     blurChangeHandler: emailBlurHandler,
     hasError: emailHasError,
-    resetInput: resetEmail,
     isValid: emailIsValid,
     errorType: emailErrorType,
   } = useInput(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/); // eslint-disable-line
@@ -29,7 +26,6 @@ const Login = () => {
     inputChangeHandler: passwordChangeHandler,
     blurChangeHandler: passwordBlurHandler,
     hasError: passwordHasError,
-    resetInput: resetPassword,
     isValid: passwordIsValid,
     errorType: passwordErrorType,
   } = useInput(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/); // eslint-disable-line
@@ -58,34 +54,29 @@ const Login = () => {
         "Password should contain uppercase,lowercase,special characters, and digits 0-9";
   }
 
-  const loginHandler = () => {
+  const loginHandler = (event) => {
+    event.preventDefault();
+
     const entries = [enteredEmail, enteredPassword];
-
     const entriesEmpty = entries.every((element) => element.length === 0);
-
     const entriesValid = emailIsValid && passwordIsValid;
 
     if (!entriesEmpty && entriesValid) {
       dispatch(
-        signin({
+        signIn({
           email: enteredEmail,
           password: enteredPassword,
         })
       );
-      resetEmail();
-      resetPassword();
-
-      navigate("/");
-      dispatch(authActions.setError({ errorMessage: "" }));
     }
   };
 
   return (
     <div className={styles.login}>
       <Card className={styles.loginCard}>
-        {errorMessage && (
+        {error && (
           <div className={styles.errorDiv}>
-            <p>{errorMessage}</p>
+            <p>{error}</p>
           </div>
         )}
         <form className={styles.loginForm}>
@@ -115,15 +106,16 @@ const Login = () => {
             <p className={styles.errorText}>{passwordErrorText}</p>
           )}
 
-          <div className={styles.container}>
-            <Button
-              content="Login"
-              path="/"
-              className={styles.button}
-              onClick={loginHandler}
-            />
-            <Link to="/register">Don't have an account ?</Link>
-          </div>
+          <LoadingContainer>
+            <div className={styles.container}>
+              <Button
+                content="Login"
+                className={styles.button}
+                onClick={loginHandler}
+              />
+              <Link to="/register">Don't have an account ?</Link>
+            </div>
+          </LoadingContainer>
         </form>
       </Card>
     </div>

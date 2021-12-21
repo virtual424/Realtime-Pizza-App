@@ -1,13 +1,12 @@
 import React from "react";
 import styles from "./Button.module.css";
-import { Link } from "react-router-dom";
 
-const Button = ({ content, path, className, onClick }) => {
+const Button = ({ content, className, onClick }) => {
   return (
     <div className={`${styles.btn} ${className}`}>
-      <Link className={styles.link} to={path} onClick={onClick}>
+      <button className={styles.link} onClick={onClick}>
         {content}
-      </Link>
+      </button>
     </div>
   );
 };

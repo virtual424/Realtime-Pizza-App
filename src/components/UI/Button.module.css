@@ -5,11 +5,18 @@
   background-color: var(--primary);
   border-radius: 30px;
   padding: 8px 20px;
+  cursor: pointer;
 }
 
 .link {
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
   color: white;
+  cursor: pointer;
 }
 
 .btn:hover {

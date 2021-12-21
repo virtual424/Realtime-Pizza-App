@@ -34,7 +34,7 @@ const Cart = () => {
           <form action="submit">
             <input type="text" placeholder="Address" />
             <div>
-              <Button content="Order now" path="" />
+              <Button content="Order now" />
             </div>
           </form>
         </div>
