@@ -1,4 +1,4 @@
-@import "../../_variables.css";
+@import "../../../_variables.css";
 
 .menuCard {
   padding: 10px 20px;
@@ -43,22 +43,4 @@
   width: 100%;
   justify-content: space-between;
   align-items: center;
-}
-
-.pricingContainer button {
-  display: flex;
-  justify-content: space-evenly;
-  border-radius: 30px;
-  border: 2px solid var(--primary);
-  background-color: var(--pure);
-  color: var(--primary);
-  padding: 5px 8px;
-  width: 100px;
-  transition: var(--smooth);
-  cursor: pointer;
-}
-
-.pricingContainer button:hover {
-  background-color: var(--primary);
-  color: var(--pure);
 }

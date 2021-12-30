@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./Navbar.module.css";
 import logo from "../assets/img/logo.png";
-import { signOut } from "../store/actions/auth";
+import { signOut } from "../../store/actions/auth";
 import cart from "../assets/img/cart.png";
 import { Link } from "react-router-dom";
 import LoadingContainer from "./UI/LoadingContainer";
@@ -10,6 +10,7 @@ import React from "react";
 const Navbar = () => {
   const user = useSelector((state) => state.userReducer.user);
   const pending = useSelector((state) => state.uiReducer.pending);
+  const totalItems = useSelector((state) => state.cartReducer.totalItems);
   const dispatch = useDispatch();
 
   const logoutHandler = (event) => {
@@ -32,7 +33,7 @@ const Navbar = () => {
             )}
             {user && (
               <li>
-                <Link to="/offers">Offers</Link>
+                <Link to="/myOrders">My orders</Link>
               </li>
             )}
             {!user && !pending && (
@@ -55,12 +56,12 @@ const Navbar = () => {
               </li>
             )}
             {user && (
-              <li className={styles.cartLogo}>
-                <Link to="/cart">
+              <Link to="/cart">
+                <li className={styles.cartLogo}>
                   <img src={cart} alt="cart icon" />
-                  {/* <span>5</span> */}
-                </Link>
-              </li>
+                  <span>{totalItems}</span>
+                </li>
+              </Link>
             )}
           </ul>
         </div>

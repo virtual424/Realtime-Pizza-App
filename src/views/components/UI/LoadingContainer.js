@@ -5,11 +5,11 @@ import { CircularProgress } from "@material-ui/core";
 const LoadingContainer = (props) => {
   const pending = useSelector((state) => state.uiReducer.pending);
 
-  return pending ? (
+  return pending === "IDLE" || pending ? (
     <CircularProgress
       style={{ color: props.color || "#fe5f1e" }}
       varient="indeterminate"
-      size="20px"
+      size="50px"
     />
   ) : (
     props.children

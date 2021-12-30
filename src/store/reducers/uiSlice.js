@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const uiInitialState = { pending: false, error: "" };
+const uiInitialState = { pending: "IDLE", error: "" };
 
 const uiSlice = createSlice({
   name: "ui",

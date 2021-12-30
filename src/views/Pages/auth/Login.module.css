@@ -1,4 +1,4 @@
-@import "../../_variables.css";
+@import "../../../_variables.css";
 
 .login {
   min-height: calc(100vh - 100px);

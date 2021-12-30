@@ -13,6 +13,7 @@ import {
 import { uiActions } from "../reducers/uiSlice";
 
 export const signInFlow =
+  () =>
   ({ dispatch }) =>
   (next) =>
   (action) => {
@@ -25,6 +26,7 @@ export const signInFlow =
   };
 
 export const signUpFlow =
+  () =>
   ({ dispatch }) =>
   (next) =>
   (action) => {
@@ -36,6 +38,7 @@ export const signUpFlow =
   };
 
 export const signOutFlow =
+  () =>
   ({ dispatch }) =>
   (next) =>
   (action) => {
@@ -47,6 +50,7 @@ export const signOutFlow =
   };
 
 export const getUserFlow =
+  () =>
   ({ dispatch }) =>
   (next) =>
   (action) => {
@@ -58,6 +62,7 @@ export const getUserFlow =
   };
 
 export const saveUserFlow =
+  () =>
   ({ dispatch }) =>
   (next) =>
   (action) => {

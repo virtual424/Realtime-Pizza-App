@@ -4,7 +4,7 @@ import Card from "../../components/UI/Card";
 import Button from "../../components/UI/Button";
 import Input from "../../components/UI/Input";
 import useInput from "../../hooks/Input";
-import { signIn } from "../../store/actions/auth";
+import { signIn } from "../../../store/actions/auth";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingContainer from "../../components/UI/LoadingContainer";
 

@@ -10,7 +10,14 @@ const HeroSection = () => {
   const user = useSelector((state) => state.userReducer.user);
   const navigate = useNavigate();
 
-  const btnContent = user ? "Order now" : "Register now";
+  const btnContent = user
+    ? user.type === "Customer"
+      ? "Order now"
+      : "Check new Orders"
+    : "Register now";
+  const greetLabelContent = user
+    ? `Welcome, ${user.name.split(" ")[0]}`
+    : "Are you hungry?";
   const onClickHandler = user
     ? () => navigate("/menu")
     : () => navigate("/register");
@@ -18,9 +25,9 @@ const HeroSection = () => {
   return (
     <div className={styles.heroSection}>
       <div className={styles.left}>
-        <p>Are you hungry?</p>
-        <h1>Don't Wait !</h1>
         <LoadingContainer>
+          <p>{greetLabelContent}</p>
+          <h1>Don't Wait !</h1>
           <Button content={btnContent} onClick={onClickHandler} />
         </LoadingContainer>
       </div>

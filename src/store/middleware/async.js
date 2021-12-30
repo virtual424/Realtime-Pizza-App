@@ -11,7 +11,6 @@ export const signUpRequest =
     next(action);
     if (action.type === authActions.SIGN_UP_REQUEST) {
       const { name, email, password, type } = action.payload;
-
       try {
         const userCredential = await api.auth.signUp(email, password);
         if (userCredential) {
@@ -115,10 +114,6 @@ export const processSignInResult =
   (next) =>
   (action) => {
     next(action);
-    // if (action.type === SIGN_IN_SUCCESS) {
-    //   const user = action.payload;
-    //   dispatch(getUser(user.uid));
-    // } else
     if (action.type === asyncActions.SIGN_IN_FAIL) {
       dispatch(uiActions.setError(action.payload));
       dispatch(uiActions.hideLoading());
@@ -161,8 +156,7 @@ export const processSaveUserResult =
   (action) => {
     next(action);
     if (action.type === asyncActions.SAVE_USER_SUCCESS) {
-      // dispatch(userActions.setUser({ user: action.payload }));
-      dispatch(uiActions.hideLoading());
+      // dispatch(uiActions.hideLoading());
     } else if (action.type === asyncActions.SAVE_USER_FAIL) {
       dispatch(uiActions.setError(action.payload));
       dispatch(uiActions.hideLoading());
