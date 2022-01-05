@@ -11,6 +11,9 @@ const cartSlice = createSlice({
       state.totalAmount = action.payload.totalAmount;
       state.totalItems = action.payload.totalItems;
     },
+    setCartItemsCount(state, action) {
+      state.totalItems += action.payload;
+    },
   },
 });
 

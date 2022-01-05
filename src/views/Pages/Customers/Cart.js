@@ -1,19 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useRef } from "react";
 import styles from "./Cart.module.css";
 import mtCart from "../../assets/img/empty-cart.png";
 import Button from "../../components/UI/Button";
 import { useSelector, useDispatch } from "react-redux";
 import cartIcon from "../../assets/img/cart-black.png";
 import PizzaTile from "../../components/cart/PizzaTile.js";
-import { getCart } from "../../../store/actions/cart";
+import { createOrder } from "../../../store/actions/Order";
 
 const Cart = () => {
   const cartState = useSelector((state) => state.cartReducer);
   const dispatch = useDispatch();
+  const inputRef = useRef();
 
-  useEffect(() => {
-    dispatch(getCart());
-  }, []);
+  const createOrderHandler = (event) => {
+    event.preventDefault();
+    const enteredAdd = inputRef.current.value.trim();
+    console.log(enteredAdd);
+    if (enteredAdd.length !== 0) {
+      dispatch(createOrder({ cartState, address: enteredAdd }));
+    }
+  };
 
   return (
     <div className={styles.cart}>
@@ -48,9 +54,9 @@ const Cart = () => {
               </span>
             </div>
             <form action="submit">
-              <input type="text" placeholder="Address" />
+              <input type="text" placeholder="Address" ref={inputRef} />
               <div>
-                <Button content="Order now" />
+                <Button content="Order now" onClick={createOrderHandler} />
               </div>
             </form>
           </div>

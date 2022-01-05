@@ -8,7 +8,7 @@ const MenuSectionContainer = ({ menu }) => {
 
   useEffect(() => {
     dispatch(getMenu());
-  }, []);
+  }, [dispatch]);
 
   return <MenuSection menu={menu} />;
 };

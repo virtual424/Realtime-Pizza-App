@@ -1,0 +1,106 @@
+import { removeFromCart } from "../actions/cart";
+import * as orderActions from "../actions/Order";
+import { orderAction } from "../reducers/orderSlice";
+import { uiActions } from "../reducers/uiSlice";
+
+export const createOrderMdl =
+  ({ api }) =>
+  ({ dispatch, getState }) =>
+  (next) =>
+  async (action) => {
+    next(action);
+
+    switch (action.type) {
+      case orderActions.CREATE_ORDER:
+        dispatch(orderActions.createOrderRequest(action.payload));
+        dispatch(uiActions.showLoading());
+        break;
+      case orderActions.CREATE_ORDER_REQUEST:
+        try {
+          //make api call
+          const uid = getState().userReducer.user.uid;
+          await api.order.createOrder(action.payload, uid);
+          //onSuccess
+          dispatch(orderActions.createOrderSuccess());
+        } catch (error) {
+          dispatch(orderActions.createOrderFail(error));
+        }
+        break;
+      case orderActions.CREATE_ORDER_SUCCESS:
+        dispatch(removeFromCart());
+        break;
+      case orderActions.CREATE_ORDER_FAIL:
+        dispatch(uiActions.setError(action.payload));
+        dispatch(uiActions.hideLoading());
+    }
+  };
+
+export const getOrderMdl =
+  ({ api }) =>
+  ({ dispatch, getState }) =>
+  (next) =>
+  async (action) => {
+    next(action);
+
+    switch (action.type) {
+      case orderActions.GET_ORDER:
+        dispatch(orderActions.getOrderRequest());
+        dispatch(uiActions.showLoading());
+        break;
+      case orderActions.GET_ORDER_REQUEST:
+        try {
+          //make api call
+          const { type, uid } = getState().userReducer.user;
+          let orderList;
+          if (type === "Admin") {
+            orderList = await api.order.getOrder("");
+          } else {
+            orderList = await api.order.getOrder(uid);
+          }
+          //onSuccess
+          if (orderList) {
+            dispatch(orderActions.getOrderSuccess(orderList));
+          }
+        } catch (error) {
+          dispatch(orderActions.getOrderFail(error));
+        }
+        break;
+      case orderActions.GET_ORDER_SUCCESS:
+        dispatch(orderAction.setOrder(action.payload));
+        dispatch(uiActions.hideLoading());
+        break;
+      case orderActions.GET_ORDER_FAIL:
+        dispatch(uiActions.setError(action.payload));
+        dispatch(uiActions.hideLoading());
+        break;
+    }
+  };
+
+export const updateOrderStatusMdl =
+  ({ api }) =>
+  ({ dispatch, getState }) =>
+  (next) =>
+  async (action) => {
+    next(action);
+
+    switch (action.type) {
+      case orderActions.UPDATE_ORDER_STATUS:
+        dispatch(orderActions.updateOrderStatusRequest(action.payload));
+        break;
+      case orderActions.UPDATE_ORDER_STATUS_REQUEST:
+        try {
+          await api.order.updateOrderStatus(action.payload);
+          dispatch(orderActions.updateOrderStatusSuccess());
+        } catch (error) {
+          dispatch(orderActions.updateOrderStatusFailure(error));
+        }
+        break;
+      case orderActions.UPDATE_ORDER_STATUS_SUCCESS:
+        break;
+      case orderActions.UPDATE_ORDER_STATUS_FAILURE:
+        dispatch(uiActions.setError(action.payload));
+        break;
+    }
+  };
+
+export const orderMdl = [createOrderMdl, getOrderMdl, updateOrderStatusMdl];

@@ -12,6 +12,7 @@ import { getUser } from "./store/actions/auth";
 import Login from "./views/Pages/auth/Login";
 import { uiActions } from "./store/reducers/uiSlice";
 import MenuSectionContainer from "./views/components/Menu/MenuSectionContainer";
+import Order from "./views/Pages/Customers/Order";
 
 function App() {
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ function App() {
           <Route path="/menu" element={<MenuSectionContainer menu={menu} />} />
         )}
         {user && <Route path="/cart" element={<Cart />} />}
+        {user && <Route path="/myOrders" element={<Order />} />}
         {!user && <Route path="/register" element={<Register />} />}
         {(!user || pending) && <Route path="/login" element={<Login />} />}
       </Routes>

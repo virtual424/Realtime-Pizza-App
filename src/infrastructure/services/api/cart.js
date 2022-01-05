@@ -3,6 +3,7 @@ import {
   collection,
   setDoc,
   onSnapshot,
+  deleteDoc,
   doc,
   where,
   updateDoc,
@@ -55,7 +56,18 @@ const cartApi = {
       throw e;
     }
   },
-  removeFromCart: async () => {},
+  removeFromCart: async (uid) => {
+    try {
+      const cartRef = collection(db, `users/${uid}/Cart`);
+      const querySnapshot = await getDocs(cartRef);
+      querySnapshot.forEach(async (item) => {
+        await deleteDoc(doc(db, `users/${uid}/Cart/${item.ref.id}`));
+      });
+    } catch (e) {
+      console.log(e);
+      throw e;
+    }
+  },
 };
 
 export default cartApi;

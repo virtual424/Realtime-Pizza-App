@@ -1,6 +1,7 @@
 import * as authActions from "../actions/auth";
 import * as asyncActions from "../actions/async";
 import { uiActions } from "../reducers/uiSlice";
+import { getCart } from "../actions/cart";
 import { userActions } from "../reducers/userSlice";
 
 export const signUpRequest =
@@ -142,7 +143,7 @@ export const processGetUserResult =
     next(action);
     if (action.type === asyncActions.GET_USER_SUCCESS) {
       dispatch(userActions.setUser({ user: action.payload }));
-      dispatch(uiActions.hideLoading());
+      dispatch(getCart());
     } else if (action.type === asyncActions.GET_USER_FAIL) {
       dispatch(uiActions.setError(action.payload));
       dispatch(uiActions.hideLoading());

@@ -1,4 +1,5 @@
 import * as cartActions from "../actions/cart";
+import { cartAction } from "../reducers/cartSlice";
 import { uiActions } from "../reducers/uiSlice";
 
 export const addToCartMdl =
@@ -9,7 +10,7 @@ export const addToCartMdl =
     next(action);
     if (action.type === cartActions.ADD_TO_CART) {
       dispatch(cartActions.addToCartRequest(action.payload));
-      dispatch(uiActions.showLoading());
+      // dispatch(uiActions.showLoading());
     }
   };
 
@@ -38,7 +39,8 @@ export const processAddToCartResultMdl =
   (action) => {
     next(action);
     if (action.type === cartActions.ADD_TO_CART_SUCCESS) {
-      dispatch(uiActions.hideLoading());
+      // dispatch(uiActions.hideLoading());
+      dispatch(cartAction.setCartItemsCount(1));
     } else if (action.type === cartActions.ADD_TO_CART_FAIL) {
       dispatch(uiActions.setError(action.payload));
       dispatch(uiActions.hideLoading());
@@ -53,7 +55,6 @@ export const getCartMdl =
     next(action);
     if (action.type === cartActions.GET_CART) {
       dispatch(cartActions.getCartRequest(action.payload));
-      dispatch(uiActions.showLoading());
     }
   };
 
@@ -106,14 +107,16 @@ export const removeFromCartMdl =
 
 export const removeFromCartRequestMdl =
   ({ api }) =>
-  ({ dispatch }) =>
+  ({ dispatch, getState }) =>
   (next) =>
   async (action) => {
     next(action);
 
     if (action.type === cartActions.REMOVE_FROM_CART_REQUEST) {
       try {
-        await api.cart.removeFromCart(action.payload);
+        const state = getState();
+        const uid = state.userReducer.user.uid;
+        await api.cart.removeFromCart(uid);
         dispatch(cartActions.removeFromCartSuccess());
       } catch (error) {
         dispatch(cartActions.removeFromCartFail(error));

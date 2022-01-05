@@ -40,7 +40,6 @@ export const normalizeCart =
         acc = acc + curr.Quantity;
         return acc;
       }, 0);
-      console.log(totalAmount, totalItems);
       const data = { cart: cartList, totalAmount, totalItems };
       dispatch(cartAction.setCart(data));
       dispatch(uiActions.hideLoading());

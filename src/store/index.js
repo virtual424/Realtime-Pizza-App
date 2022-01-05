@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./reducers/userSlice.js";
+import orderReducer from "./reducers/orderSlice";
 import uiReducer from "./reducers/uiSlice.js";
 import menuReducer from "./reducers/menuSlice";
 import { asyncMdl } from "./middleware/async";
@@ -8,6 +9,7 @@ import { normalizeMdl } from "./middleware/normalize";
 import services from "../infrastructure/services/index.js";
 import { menuMdl } from "./middleware/menu.js";
 import { cartMdl } from "./middleware/cart.js";
+import { orderMdl } from "./middleware/order.js";
 import cartReducer from "./reducers/cartSlice";
 
 const middlewares = [
@@ -16,6 +18,7 @@ const middlewares = [
   ...normalizeMdl,
   ...menuMdl,
   ...cartMdl,
+  ...orderMdl,
 ].map((f) => f(services));
 
 const store = configureStore({
@@ -24,6 +27,7 @@ const store = configureStore({
     userReducer: userReducer,
     menuReducer: menuReducer,
     cartReducer: cartReducer,
+    orderReducer: orderReducer,
   },
   middleware: middlewares,
 });
