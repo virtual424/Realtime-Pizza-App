@@ -24,10 +24,11 @@ export const getMenuRequestMdl =
 
     if (action.type === menuAction.GET_MENU_REQUEST) {
       try {
-        const data = await api.menu.getMenu();
-        if (data) {
-          dispatch(menuAction.getMenuSuccess(data));
-        }
+        await api.menu.getMenu((menuList) => {
+          if (menuList) {
+            dispatch(menuAction.getMenuSuccess(menuList));
+          }
+        });
       } catch (error) {
         dispatch(menuAction.getMenuFail(error));
       }
@@ -60,6 +61,7 @@ export const addPizzaMdl =
       case menuAction.ADD_PIZZA:
         dispatch(menuAction.addPizzaRequest(action.payload));
         dispatch(uiActions.showLoading());
+        break;
       case menuAction.ADD_PIZZA_REQUEST:
         try {
           //make api call
@@ -69,8 +71,12 @@ export const addPizzaMdl =
         } catch (error) {
           dispatch(menuAction.addPizzaFailure(error));
         }
+        break;
       case menuAction.ADD_PIZZA_FAILURE:
         dispatch(uiActions.setError(action.payload));
+        dispatch(uiActions.hideLoading());
+        break;
+      default:
     }
   };
 
@@ -85,6 +91,7 @@ export const editPizzaMdl =
       case menuAction.EDIT_PIZZA:
         dispatch(menuAction.editPizzaRequest(action.payload));
         dispatch(uiActions.showLoading());
+        break;
       case menuAction.EDIT_PIZZA_REQUEST:
         try {
           //make api call
@@ -93,9 +100,14 @@ export const editPizzaMdl =
           dispatch(menuAction.editPizzaSuccess());
         } catch (error) {
           dispatch(menuAction.editPizzaFailure(error));
+          dispatch(uiActions.hideLoading());
         }
+        break;
       case menuAction.EDIT_PIZZA_FAILURE:
         dispatch(uiActions.setError(action.payload));
+        dispatch(uiActions.hideLoading());
+        break;
+      default:
     }
   };
 

@@ -6,6 +6,7 @@
   justify-content: space-between;
   padding: 4rem 0;
   background-color: var(--secondary);
+  height: calc(100vh - 233px);
 }
 
 .left {

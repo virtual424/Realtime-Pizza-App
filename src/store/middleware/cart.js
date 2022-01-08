@@ -1,5 +1,4 @@
 import * as cartActions from "../actions/cart";
-import { cartAction } from "../reducers/cartSlice";
 import { uiActions } from "../reducers/uiSlice";
 
 export const addToCartMdl =
@@ -10,7 +9,6 @@ export const addToCartMdl =
     next(action);
     if (action.type === cartActions.ADD_TO_CART) {
       dispatch(cartActions.addToCartRequest(action.payload));
-      // dispatch(uiActions.showLoading());
     }
   };
 
@@ -38,10 +36,7 @@ export const processAddToCartResultMdl =
   (next) =>
   (action) => {
     next(action);
-    if (action.type === cartActions.ADD_TO_CART_SUCCESS) {
-      // dispatch(uiActions.hideLoading());
-      dispatch(cartAction.setCartItemsCount(1));
-    } else if (action.type === cartActions.ADD_TO_CART_FAIL) {
+    if (action.type === cartActions.ADD_TO_CART_FAIL) {
       dispatch(uiActions.setError(action.payload));
       dispatch(uiActions.hideLoading());
     }
@@ -69,10 +64,12 @@ export const getCartRequestMdl =
       try {
         const state = getState();
         const uid = state.userReducer.user.uid;
-        const data = await api.cart.getCart(uid);
-        if (data) {
-          dispatch(cartActions.getCartSuccess(data));
-        }
+        await api.cart.getCart(uid, (data) => {
+          console.log(data);
+          if (data) {
+            dispatch(cartActions.getCartSuccess(data));
+          }
+        });
       } catch (error) {
         dispatch(cartActions.getCartFail(error));
       }

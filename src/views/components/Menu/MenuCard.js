@@ -3,12 +3,13 @@ import styles from "./MenuCard.module.css";
 import pizzaIcon from "../../assets/img/pizza.png";
 import Button2 from "../UI/Button2";
 import { useSelector, useDispatch } from "react-redux";
+import { menuActions } from "../../../store/reducers/menuSlice";
 import { addToCart } from "../../../store/actions/cart";
 
 const MenuCard = ({ menuData, id }) => {
   const user = useSelector((state) => state.userReducer.user);
   const btnContent = user.type === "Admin" ? "Edit" : "+ Add";
-  const menu = useSelector((state) => state.menuReducer.menu);
+  const { menu } = useSelector((state) => state.menuReducer);
   const dispatch = useDispatch();
 
   const addToCartHandler = () => {
@@ -17,7 +18,15 @@ const MenuCard = ({ menuData, id }) => {
   };
 
   const editMenuCardHandler = () => {
-    console.log("editing");
+    dispatch(
+      menuActions.addMenu({
+        Title: menuData.Name,
+        Size: menuData.Size,
+        Price: menuData.Price,
+        edit: true,
+        editId: id,
+      })
+    );
   };
 
   const handler =

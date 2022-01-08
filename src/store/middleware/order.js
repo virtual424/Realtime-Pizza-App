@@ -32,6 +32,8 @@ export const createOrderMdl =
       case orderActions.CREATE_ORDER_FAIL:
         dispatch(uiActions.setError(action.payload));
         dispatch(uiActions.hideLoading());
+        break;
+      default:
     }
   };
 
@@ -51,16 +53,20 @@ export const getOrderMdl =
         try {
           //make api call
           const { type, uid } = getState().userReducer.user;
-          let orderList;
           if (type === "Admin") {
-            orderList = await api.order.getOrder("");
+            await api.order.getOrder("", (orderList) => {
+              if (orderList) {
+                dispatch(orderActions.getOrderSuccess(orderList));
+              }
+            });
           } else {
-            orderList = await api.order.getOrder(uid);
+            await api.order.getOrder(uid, (orderList) => {
+              if (orderList) {
+                dispatch(orderActions.getOrderSuccess(orderList));
+              }
+            });
           }
           //onSuccess
-          if (orderList) {
-            dispatch(orderActions.getOrderSuccess(orderList));
-          }
         } catch (error) {
           dispatch(orderActions.getOrderFail(error));
         }
@@ -73,12 +79,13 @@ export const getOrderMdl =
         dispatch(uiActions.setError(action.payload));
         dispatch(uiActions.hideLoading());
         break;
+      default:
     }
   };
 
 export const updateOrderStatusMdl =
   ({ api }) =>
-  ({ dispatch, getState }) =>
+  ({ dispatch }) =>
   (next) =>
   async (action) => {
     next(action);
@@ -100,6 +107,7 @@ export const updateOrderStatusMdl =
       case orderActions.UPDATE_ORDER_STATUS_FAILURE:
         dispatch(uiActions.setError(action.payload));
         break;
+      default:
     }
   };
 

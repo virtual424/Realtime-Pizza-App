@@ -7,7 +7,8 @@ import { Link } from "react-router-dom";
 import LoadingContainer from "./UI/LoadingContainer";
 import React from "react";
 import Button from "./UI/Button";
-import { updateOrderStatus } from "../../store/actions/Order";
+import { uiActions } from "../../store/reducers/uiSlice";
+import { menuActions } from "../../store/reducers/menuSlice";
 
 const Navbar = () => {
   const user = useSelector((state) => state.userReducer.user);
@@ -15,22 +16,19 @@ const Navbar = () => {
   const { totalItems } = useSelector((state) => state.cartReducer);
   const dispatch = useDispatch();
 
-  const ORDER_PLACED = "Order placed";
-  const ORDER_CONFIRMATION = "Order confirmation";
-  const PREPARATION = "Preparation";
-  const OUT_FOR_DELIVERY = "Out for delivery";
-  const COMPLETE = "Complete";
-
   const logoutHandler = (event) => {
     event.preventDefault();
     dispatch(signOut());
   };
 
-  const addPizzaHandler = () => {
+  const openPizzaModalHandler = () => {
     dispatch(
-      updateOrderStatus({
-        orderId: "EMbzXtUm6Lvi0KCZV2Ag",
-        status: OUT_FOR_DELIVERY,
+      menuActions.addMenu({
+        Title: "",
+        Price: "",
+        Size: "",
+        edit: false,
+        editId: null,
       })
     );
   };
@@ -50,7 +48,7 @@ const Navbar = () => {
             )}
             {user && (
               <li>
-                <Link to="/myOrders">My orders</Link>
+                <Link to="/order">My orders</Link>
               </li>
             )}
             {!user && !pending && (
@@ -81,7 +79,7 @@ const Navbar = () => {
               </Link>
             )}
             {user && user.type === "Admin" && (
-              <Button content="Add pizza" onClick={addPizzaHandler} />
+              <Button content="Add pizza" onClick={openPizzaModalHandler} />
             )}
           </ul>
         </div>

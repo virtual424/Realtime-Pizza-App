@@ -1,10 +1,16 @@
 import { db } from "../../../firebase";
-import { collection, onSnapshot } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  onSnapshot,
+  setDoc,
+  doc,
+} from "firebase/firestore";
 
 const menuApi = {
-  getMenu: () =>
+  getMenu: (callback) =>
     new Promise((resolve, reject) => {
-      const unsubscribe = onSnapshot(
+      onSnapshot(
         collection(db, "Menu"),
         (snapshot) => {
           let menuList = [];
@@ -12,7 +18,7 @@ const menuApi = {
             snapshot.forEach((doc) => {
               menuList.push({ id: doc.id, ...doc.data() });
             });
-            resolve(menuList);
+            callback(menuList);
           }
         },
         (error) => {
@@ -20,6 +26,24 @@ const menuApi = {
         }
       );
     }),
+
+  addPizza: async (data) => {
+    try {
+      await addDoc(collection(db, "Menu"), data);
+    } catch (e) {
+      console.log(e);
+      throw e;
+    }
+  },
+
+  editPizza: async ({ menuId, menu }) => {
+    try {
+      await setDoc(doc(db, "Menu", `${menuId}`), menu);
+    } catch (e) {
+      console.log(e);
+      throw e;
+    }
+  },
 };
 
 export default menuApi;

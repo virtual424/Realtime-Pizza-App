@@ -8,6 +8,7 @@ const Input = React.forwardRef((props, ref) => {
       type={props.type}
       placeholder={props.placeholder}
       value={props.value}
+      defaultValue={props.defaultValue}
       onChange={props.onChange}
       onBlur={props.onBlur}
       ref={ref}

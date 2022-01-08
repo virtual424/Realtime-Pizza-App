@@ -13,10 +13,10 @@ import {
 } from "firebase/firestore";
 
 const cartApi = {
-  getCart: (id) =>
+  getCart: (id, callback) =>
     new Promise((resolve, reject) => {
       const cartRef = collection(db, `users/${id}/Cart`);
-      const unsubscribe = onSnapshot(
+      onSnapshot(
         cartRef,
         (snapshot) => {
           let cartList = [];
@@ -25,7 +25,8 @@ const cartApi = {
               cartList.push({ id: doc.id, ...doc.data() });
             });
           }
-          resolve(cartList);
+          callback(cartList);
+          // resolve(cartList);
         },
         (error) => {
           console.log(error);

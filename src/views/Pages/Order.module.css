@@ -1,0 +1,60 @@
+.orderPage {
+  height: calc(100vh - 233px);
+  padding: 4rem 0;
+  background-color: var(--secondary);
+}
+
+.orderPage > .container {
+  width: 100%;
+  margin: 0 auto;
+  width: 80%;
+  background-color: var(--secondary);
+}
+
+.orderPage > .container > h2 {
+  font-weight: 600;
+  font-size: 1.3rem;
+  margin-bottom: 25px;
+}
+
+.orderPage table {
+  width: 100%;
+  background-color: white;
+}
+
+.orderPage th {
+  padding: 10px;
+  text-align: start;
+  background-color: var(--secondary);
+  margin: 0;
+}
+
+.orderPage td {
+  padding: 10px;
+  font-weight: 500;
+  border: 1px solid var(--gray);
+}
+
+.orderPage td > a {
+  text-decoration: none;
+  color: var(--primary);
+  font-size: small;
+  font-weight: 500;
+}
+
+.container > p {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.orderPage td > a:hover {
+  color: var(--primary-hover);
+}
+
+tbody > tr > td:first-child > p {
+  font-weight: 500;
+  margin: 5px 0;
+  font-size: small;
+}

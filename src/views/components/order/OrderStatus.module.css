@@ -1,0 +1,102 @@
+.orderStatus {
+  height: calc(100vh - 233px);
+  padding: 4rem 0;
+  background-color: var(--secondary);
+}
+
+.statusContainer {
+  width: 65%;
+  margin: 0 auto;
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.heading p {
+  padding: 5px 15px;
+  font-size: small;
+  font-weight: bold;
+  border-radius: 20px;
+  background-color: white;
+  color: green;
+}
+
+.heading h2 {
+  font-weight: 500;
+  margin-bottom: 60px;
+}
+
+.statusLine {
+  font-size: x-large;
+  position: relative;
+}
+
+.statusLine:not(:last-child) {
+  padding-bottom: 65px;
+}
+
+.statusLine > span {
+  position: relative;
+}
+
+.statusLine > span:before {
+  font-family: "Line Awesome Free";
+  font-size: 46px;
+  font-weight: 600;
+  position: absolute;
+  left: -90px;
+  top: 0;
+  transform: translateY(-15%);
+}
+
+.orderStatus ul {
+  margin-left: 42px;
+}
+
+.statusLine:nth-child(1) span:before {
+  content: "\f46c";
+}
+.statusLine:nth-child(2) span:before {
+  content: "\f560";
+}
+.statusLine:nth-child(3) span:before {
+  content: "\f818";
+}
+.statusLine:nth-child(4) span:before {
+  content: "\f0d1";
+}
+.statusLine:nth-child(5) span:before {
+  content: "\f502";
+}
+
+.statusLine:not(:last-child):before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: -20px;
+  width: 2px;
+  height: 100%;
+  background: black;
+  margin-top: 15px;
+}
+
+.statusLine:nth-child(5) span:after {
+  box-shadow: 0 20px 1px 20px var(--secondary);
+}
+
+.statusLine.stepCompleted:before {
+  background: var(--gray);
+}
+
+.statusLine.stepCompleted {
+  color: var(--gray);
+}
+.statusLine.currentStep {
+  color: var(--primary);
+}
+.statusLine.currentStep:before {
+  background: var(--primary);
+}

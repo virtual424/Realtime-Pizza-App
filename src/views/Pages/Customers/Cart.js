@@ -6,18 +6,20 @@ import { useSelector, useDispatch } from "react-redux";
 import cartIcon from "../../assets/img/cart-black.png";
 import PizzaTile from "../../components/cart/PizzaTile.js";
 import { createOrder } from "../../../store/actions/Order";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const cartState = useSelector((state) => state.cartReducer);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const inputRef = useRef();
 
   const createOrderHandler = (event) => {
     event.preventDefault();
     const enteredAdd = inputRef.current.value.trim();
-    console.log(enteredAdd);
     if (enteredAdd.length !== 0) {
       dispatch(createOrder({ cartState, address: enteredAdd }));
+      navigate("/order");
     }
   };
 

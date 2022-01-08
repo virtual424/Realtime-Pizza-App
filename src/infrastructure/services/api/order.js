@@ -4,12 +4,7 @@ import {
   addDoc,
   onSnapshot,
   doc,
-  where,
   updateDoc,
-  increment,
-  query,
-  getDocs,
-  getDoc,
 } from "firebase/firestore";
 
 const orderApi = {
@@ -19,7 +14,7 @@ const orderApi = {
       const currDate = new Date().toString();
       const orderObj = {
         uid: uid,
-        Date: currDate.slice(0, currDate.lastIndexOf(" ")),
+        Date: currDate.slice(0, currDate.indexOf("G") - 1),
         Amount: data.cartState.totalAmount,
         Quantity: data.cartState.totalItems,
         items: data.cartState.cart,
@@ -32,21 +27,25 @@ const orderApi = {
       throw e;
     }
   },
-  getOrder: async (uid) => {
+  getOrder: async (uid, callback) => {
     try {
       const orderRef = collection(db, `Order`);
-      let querySnapshot;
-      if (!uid) {
-        querySnapshot = await getDocs(orderRef);
-      } else {
-        const q = query(orderRef, where("uid", "==", `${uid}`));
-        querySnapshot = await getDocs(q);
-      }
-      let orderList = [];
-      querySnapshot.forEach((orderItem) => {
-        orderList.push({ id: orderItem.id, ...orderItem.data() });
+
+      onSnapshot(orderRef, (snapshot) => {
+        let orderList = [];
+        if (snapshot) {
+          snapshot.forEach((orderItem) => {
+            if (!uid) {
+              orderList.push({ id: orderItem.id, ...orderItem.data() });
+            } else {
+              if (orderItem.data().uid === uid) {
+                orderList.push({ id: orderItem.id, ...orderItem.data() });
+              }
+            }
+          });
+        }
+        callback(orderList);
       });
-      return orderList;
     } catch (e) {
       console.log(e);
       throw e;

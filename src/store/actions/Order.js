@@ -61,16 +61,16 @@ export const getOrderFail = (error) => {
   };
 };
 
-export const updateOrderStatus = (orderId) => {
+export const updateOrderStatus = (data) => {
   return {
     type: UPDATE_ORDER_STATUS,
-    payload: orderId,
+    payload: data,
   };
 };
-export const updateOrderStatusRequest = (orderId) => {
+export const updateOrderStatusRequest = (data) => {
   return {
     type: UPDATE_ORDER_STATUS_REQUEST,
-    payload: orderId,
+    payload: data,
   };
 };
 export const updateOrderStatusSuccess = () => {

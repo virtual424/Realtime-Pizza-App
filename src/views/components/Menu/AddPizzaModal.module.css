@@ -1,0 +1,42 @@
+@import "../../../_variables.css";
+
+.menuCard {
+  left: 50%;
+  top: 50%;
+  z-index: 10;
+  display: flex;
+  width: 300px;
+  position: absolute;
+  padding: 20px 30px;
+  align-items: center;
+  background: white;
+  border-radius: 10px;
+  flex-direction: column;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  transform: translate(-155px, -255px);
+}
+
+.menuCard img {
+  height: 180px;
+  width: 180px;
+}
+
+.pizzaInfo {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.pizzaInfo label {
+  font-weight: 500;
+}
+
+.control {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 15px;
+  align-items: center;
+}
