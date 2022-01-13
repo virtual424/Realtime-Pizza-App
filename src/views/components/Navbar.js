@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import LoadingContainer from "./UI/LoadingContainer";
 import React from "react";
 import Button from "./UI/Button";
-import { uiActions } from "../../store/reducers/uiSlice";
 import { menuActions } from "../../store/reducers/menuSlice";
 
 const Navbar = () => {

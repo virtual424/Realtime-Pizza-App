@@ -53,3 +53,9 @@
 .cartLogo:hover {
   background-color: var(--primary-hover);
 }
+
+@media (max-width: 500px) {
+  .navbar {
+    padding: 1rem 1rem;
+  }
+}

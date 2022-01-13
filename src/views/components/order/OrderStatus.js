@@ -2,13 +2,6 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styles from "./OrderStatus.module.css";
 import { statusList } from "./TableRow";
-import {
-  COMPLETE,
-  ORDER_CONFIRMATION,
-  ORDER_PLACED,
-  OUT_FOR_DELIVERY,
-  PREPARATION,
-} from "./TableRow";
 
 const OrderStatus = () => {
   const { orderId } = useParams();

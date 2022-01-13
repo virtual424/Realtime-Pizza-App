@@ -3,6 +3,7 @@
 .cart {
   text-align: center;
   background-color: var(--secondary);
+  height: calc(100vh - 145px);
   padding: 20px;
 }
 
@@ -65,4 +66,33 @@
 
 .priceContainer input:focus {
   border: 1px solid var(--primary);
+}
+
+@media (max-width: 500px) {
+  .cart {
+    padding: 10px;
+    height: calc(100vh - 125px);
+  }
+
+  .orderContainer {
+    width: 100%;
+  }
+
+  .orderContainerHeader {
+    font-size: 0.8rem;
+  }
+
+  .priceContainer {
+    text-align: start;
+    padding-left: 10px;
+    font-size: 0.9rem;
+  }
+
+  .priceText {
+    font-size: 1rem;
+  }
+
+  .amountText {
+    margin-bottom: 15px;
+  }
 }

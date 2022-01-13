@@ -28,7 +28,11 @@ const HeroSection = () => {
         <LoadingContainer>
           <p>{greetLabelContent}</p>
           <h1>Don't Wait !</h1>
-          <Button content={btnContent} onClick={onClickHandler} />
+          <Button
+            content={btnContent}
+            onClick={onClickHandler}
+            className={styles.btn}
+          />
         </LoadingContainer>
       </div>
       <div className={styles.right}>

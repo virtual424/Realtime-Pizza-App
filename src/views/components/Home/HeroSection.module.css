@@ -27,3 +27,28 @@
 .right img {
   height: 520px;
 }
+
+@media (max-width: 500px) {
+  .heroSection {
+    flex-direction: column-reverse;
+    justify-content: space-evenly;
+  }
+
+  .right {
+    height: 50%;
+    width: 100%;
+  }
+
+  .left {
+    padding: 0;
+  }
+
+  .left h1 {
+    font-size: 3rem;
+  }
+
+  .right img {
+    height: 100%;
+    margin-left: 40px;
+  }
+}

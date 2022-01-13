@@ -6,7 +6,6 @@ import pizzaIcon from "../../assets/img/pizza.png";
 import Button2 from "../UI/Button2";
 import Backdrop from "../UI/Backdrop";
 import Input from "../UI/Input";
-import { uiActions } from "../../../store/reducers/uiSlice";
 import { addPizza, editPizza } from "../../../store/actions/Menu";
 import { menuActions } from "../../../store/reducers/menuSlice";
 
