@@ -9,7 +9,7 @@ const LoadingContainer = (props) => {
     <CircularProgress
       style={{ color: props.color || "#fe5f1e" }}
       varient="indeterminate"
-      size="50px"
+      size="30px"
     />
   ) : (
     props.children

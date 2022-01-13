@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import styles from "../../Pages/Order.module.css";
+import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { updateOrderStatus } from "../../../store/actions/Order";
 
@@ -26,10 +28,25 @@ const TableRow = ({ order, type }) => {
     );
   };
 
+  const currentOrderStatus = useSelector((state) => {
+    const orderList = state.orderReducer.order;
+    const orderId = order.id;
+    const currentOrder = orderList.find((order) => order.id === orderId);
+    return currentOrder.status;
+  });
+
+  const completeClassname =
+    currentOrderStatus === COMPLETE.status ? styles.orderComplete : "";
+
   return (
     <tr>
       <td>
-        <Link to={type === "Customer" && `/order/${order.id}`}>{order.id}</Link>
+        <Link
+          to={type === "Customer" && `/order/${order.id}`}
+          className={completeClassname}
+        >
+          {order.id}
+        </Link>
         {order.items.map((item) => {
           return (
             <p key={item.id}>
