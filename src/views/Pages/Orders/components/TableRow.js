@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styles from "../../Pages/Order.module.css";
+import styles from "../Order.module.css";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { updateOrderStatus } from "../../../store/actions/Order";
+import { updateOrderStatus } from "../../../../store/actions/Order";
 
 export const ORDER_PLACED = { status: "Placed", seqId: 1 };
 export const ORDER_CONFIRMATION = { status: "Confirmed", seqId: 2 };

@@ -1,10 +1,9 @@
-import React from "react";
 import styles from "./MenuCard.module.css";
-import pizzaIcon from "../../assets/img/pizza.png";
-import Button2 from "../UI/Button2";
+import pizzaIcon from "../../../assets/img/pizza.png";
+import Button2 from "../../../UI/Button2";
 import { useSelector, useDispatch } from "react-redux";
-import { menuActions } from "../../../store/reducers/menuSlice";
-import { addToCart } from "../../../store/actions/cart";
+import { menuActions } from "../../../../store/reducers/menuSlice";
+import { addToCart } from "../../../../store/actions/cart";
 
 const MenuCard = ({ menuData, id }) => {
   const user = useSelector((state) => state.userReducer.user);

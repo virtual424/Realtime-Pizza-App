@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getOrder } from "../../store/actions/Order";
-import TableRow from "../components/order/TableRow";
+import { getOrder } from "../../../store/actions/Order";
+import TableRow from "./components/TableRow";
 import styles from "./Order.module.css";
 
 const Order = () => {

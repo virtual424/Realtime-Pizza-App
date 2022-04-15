@@ -1,19 +1,19 @@
-import Home from "./views/Pages/Home";
+import Home from "./views/Pages/Home/Home";
 import { useEffect } from "react";
-import Navbar from "./views/components/Navbar.js";
+import Navbar from "./views/Pages/Home/Navbar";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { auth } from "./firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { onAuthStateChanged } from "@firebase/auth";
-import Cart from "./views/Pages/Customers/Cart";
+import Cart from "./views/Pages/Cart/Cart";
 import Register from "./views//Pages/auth/Register";
 import { getUser } from "./store/actions/auth";
 import Login from "./views/Pages/auth/Login";
 import { uiActions } from "./store/reducers/uiSlice";
-import MenuSectionContainer from "./views/components/Menu/MenuSectionContainer";
-import Order from "./views/Pages/Order";
-import OrderStatus from "./views/components/order/OrderStatus";
-import AddPizzaModal from "./views/components/Menu/AddPizzaModal";
+import MenuSectionContainer from "./views/Pages/Menu/components/MenuSectionContainer";
+import Order from "./views/Pages/Orders/Order";
+import OrderStatus from "./views/Pages/Orders/components/OrderStatus";
+import AddPizzaModal from "./views/Pages/Menu/components/AddPizzaModal";
 
 function App() {
   const dispatch = useDispatch();

@@ -1,10 +1,10 @@
 import React, { useRef } from "react";
 import styles from "./Cart.module.css";
 import mtCart from "../../assets/img/empty-cart.png";
-import Button from "../../components/UI/Button";
+import Button from "../../UI/Button";
 import { useSelector, useDispatch } from "react-redux";
 import cartIcon from "../../assets/img/cart-black.png";
-import PizzaTile from "../../components/cart/PizzaTile.js";
+import PizzaTile from "./components/PizzaTile";
 import { createOrder } from "../../../store/actions/Order";
 import { useNavigate } from "react-router-dom";
 

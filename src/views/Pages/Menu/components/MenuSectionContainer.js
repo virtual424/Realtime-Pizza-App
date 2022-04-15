@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { getMenu } from "../../../store/actions/Menu";
+import { useEffect } from "react";
+import { getMenu } from "../../../../store/actions/Menu";
 import { useDispatch } from "react-redux";
 import MenuSection from "./MenuSection";
 

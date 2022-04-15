@@ -1,13 +1,13 @@
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./Navbar.module.css";
-import logo from "../assets/img/logo.png";
-import { signOut } from "../../store/actions/auth";
-import cartImg from "../assets/img/cart.png";
+import logo from "../../assets/img/logo.png";
+import { signOut } from "../../../store/actions/auth";
+import cartImg from "../../assets/img/cart.png";
 import { Link } from "react-router-dom";
-import LoadingContainer from "./UI/LoadingContainer";
+import LoadingContainer from "../../UI/LoadingContainer";
 import React from "react";
-import Button from "./UI/Button";
-import { menuActions } from "../../store/reducers/menuSlice";
+import Button from "../../UI/Button";
+import { menuActions } from "../../../store/reducers/menuSlice";
 
 const Navbar = () => {
   const user = useSelector((state) => state.userReducer.user);

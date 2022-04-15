@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import styles from "./Register.module.css";
 import { Link } from "react-router-dom";
-import Card from "../../components/UI/Card";
-import Button from "../../components/UI/Button";
-import Input from "../../components/UI/Input";
+import Card from "../../UI/Card";
+import Button from "../../UI/Button";
+import Input from "../../UI/Input";
 import useInput from "../../hooks/Input";
 import { signUp } from "../../../store/actions/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { uiActions } from "../../../store/reducers/uiSlice";
-import LoadingContainer from "../../components/UI/LoadingContainer";
+import LoadingContainer from "../../UI/LoadingContainer";
 
 const Register = () => {
   const [userType, setUserType] = useState("Admin");

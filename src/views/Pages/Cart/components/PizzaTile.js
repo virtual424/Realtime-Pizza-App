@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./PizzaTile.module.css";
-import pizzaIcon from "../../assets/img/pizza.png";
+import pizzaIcon from "../../../assets/img/pizza.png";
 
 const PizzaTile = ({ cartData }) => {
   return (

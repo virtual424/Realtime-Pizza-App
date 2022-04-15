@@ -2,12 +2,12 @@ import React, { useRef } from "react";
 import ReactDOM from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./AddPizzaModal.module.css";
-import pizzaIcon from "../../assets/img/pizza.png";
-import Button2 from "../UI/Button2";
-import Backdrop from "../UI/Backdrop";
-import Input from "../UI/Input";
-import { addPizza, editPizza } from "../../../store/actions/Menu";
-import { menuActions } from "../../../store/reducers/menuSlice";
+import pizzaIcon from "../../../assets/img/pizza.png";
+import Button2 from "../../../UI/Button2";
+import Backdrop from "../../../UI/Backdrop";
+import Input from "../../../UI/Input";
+import { addPizza, editPizza } from "../../../../store/actions/Menu";
+import { menuActions } from "../../../../store/reducers/menuSlice";
 
 const AddPizzaModal = () => {
   const titleRef = useRef();

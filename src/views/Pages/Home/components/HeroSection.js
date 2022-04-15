@@ -1,10 +1,9 @@
-import React from "react";
 import styles from "./HeroSection.module.css";
-import pizza from "../../assets/img/hero-pizza.png";
-import Button from "../UI/Button";
+import pizza from "../../../assets/img/hero-pizza.png";
+import Button from "../../../UI/Button";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import LoadingContainer from "../UI/LoadingContainer";
+import LoadingContainer from "../../../UI/LoadingContainer";
 
 const HeroSection = () => {
   const user = useSelector((state) => state.userReducer.user);
